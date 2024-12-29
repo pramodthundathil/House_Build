@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="content" style="width: 50%;margin: auto;">
+        <form method="post">
+            {% csrf_token %}
+            <!-- <div class="form-group">
+                <label for="appointment_date">Appointment Date:</label>
+                <input type="date" class="form-control" id="appointment_date" name="appointment_date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="appointment_time">Appointment Time:</label>
+                <input type="time" class="form-control" id="appointment_time" name="appointment_time" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea class="form-control" id="notes" name="notes"></textarea>
+            </div> -->
+
+            {{ form.as_p }} <br>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container">
+    <h4 class="text-center">Services</h4>
+    <div class="services-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        {% for service in services %}
+        <div class="service-card"
+            style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <img src="{{ service.image.url }}" alt="{{ service.name }}"
+                style="width: 100%; height: auto; border-radius: 8px 8px 0 0;">
+            <h4 style="margin: 10px 0;">{{ service.name }}</h4>
+            <p style="color: #555;">{{ service.description }}</p>
+            <p style="font-weight: bold;">Price: ${{ service.price }}</p>
+            <h5>{{service.category}}</h5>
+            <a href="{% url 'book_appointment' service.id %}" class="btn"
+                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-align: center; border-radius: 5px; text-decoration: none;">Book
+                Appointment</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

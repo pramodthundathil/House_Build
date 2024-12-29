@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+    <h5>Booked Services</h5>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Service</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th>Disposal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.customer.username }}</td>
+                <td>{{ booking.service.name }}</td>
+                <td>{{ booking.appointment_date }}</td>
+                <td>{{ booking.appointment_time }}</td>
+                <td>{{ booking.status }}</td>
+                <td>{{ booking.notes }}</td>
+                <td>{{ booking.disposal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

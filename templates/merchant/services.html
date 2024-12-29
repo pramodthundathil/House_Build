@@ -1,0 +1,84 @@
+{% extends "merchantindex.html" %}
+{% block content %}
+
+<div class="container mt-5 mb-5">
+    <div class="addbutton text-center">
+        <button type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+           Add Service
+        </button>
+        {% for message in messages %}
+       <h6 style="color:red;text-align:center">{{message}}</h6> 
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="container">
+    
+    <!--  -->
+<h4 class="text-info">Services In My List</h4>
+<br>
+<table class="table table-warning table-stripped">
+    <tr>
+        <th>Service Name</th>
+        <th>Service Description</th>
+        <th>Service Price</th>
+        <th>Service Duration</th>
+        <th>Service Image</th>
+        <th>Actions</th>
+    </tr>
+    {% for service in services %}
+    <tr>
+        <td>{{ service.name }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ service.price }}</td>
+        <td>{{ service.duration }}</td>
+        <td>
+            {% if service.image %}
+                <img src="{{ service.image.url }}" alt="{{ service.name }}" style="width: 50px; height: 50px;">
+            {% else %}
+                No Image
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'ServiceEdit' service.id %}" class="btn btn-outline-info">Edit</a>
+            <a href="{% url 'delete_service' service.id %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-outline-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Service</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body">
+
+            {% for fields in form %}
+            {{fields.label}}:
+            <br>
+            {{fields}}
+            <br>
+            {% endfor %}
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save </button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

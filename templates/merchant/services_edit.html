@@ -1,0 +1,21 @@
+{% extends "merchantindex.html" %}
+{% block content %}
+
+<div class="container-fluid pb-5">
+    {% for message in messages %}
+    <h6 style="color:rgb(0, 255, 47);text-align:center">{{message}}</h6> 
+    {% endfor %}
+
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" >
+            {%csrf_token %}
+            
+            {{form.as_p}}
+
+            <br><br>
+            <button type="submit" class="btn btn-info">Update</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
