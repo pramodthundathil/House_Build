@@ -454,6 +454,32 @@ def booked_services(request):
     bookings = ServiceBooking.objects.filter(customer = request.user)
     return render(request,"bookedservices.html",{"bookings":bookings})
 
+
+def booked_services_merchant(request):
+    bookings = ServiceBooking.objects.filter(service__user = request.user)
+
+    return render(request,"merchant/bookedservices.html",{"bookings":bookings})
+
+def approve_status(request, pk):
+    service  = ServiceBooking.objects.get(id = pk)
+    service.status = "Confirmed"
+    service.save()
+    messages.info(request,"Confirmation Success")
+
+
+    return redirect("booked_services_merchant")
+
+def reject_status(request, pk):
+    service  = ServiceBooking.objects.get(id = pk)
+    service.status = "Cancelled"
+    service.disposal = True
+    service.save()
+    messages.info(request,"Confirmation Success")
+
+
+
+    return redirect("booked_services_merchant")
+
     
 
 
